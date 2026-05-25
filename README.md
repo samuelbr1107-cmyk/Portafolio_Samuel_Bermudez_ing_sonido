@@ -148,6 +148,46 @@ Técnicas usadas para el responsive:
 - `overflow-x: hidden` en html, body y #root para evitar scroll horizontal
 
 ---
+## Cómo conectar el formulario de contacto
+
+Para que el formulario envíe mensajes reales se conectó con **Formspree**, un servicio externo que recibe los datos del formulario y los reenvía al correo configurado, sin necesidad de escribir ningún backend ni instalar dependencias adicionales.
+
+### Qué se hizo
+
+En `Contact.jsx` la función `submit` originalmente solo hacía un `console.log` con los datos. Se reemplazó por una llamada `fetch` a la API de Formspree:
+
+```js
+const submit = async (e) => {
+  e.preventDefault();
+  await fetch("https://formspree.io/f/xpwzabcd", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(form),
+  });
+  setSent(true);
+  setTimeout(() => setSent(false), 4000);
+  setForm({ name: "", email: "", message: "" });
+};
+```
+
+Lo que hace cada parte:
+- `e.preventDefault()` evita que la página recargue al enviar
+- `fetch` manda los datos del formulario a Formspree en formato JSON
+- `JSON.stringify(form)` convierte el objeto `{ name, email, message }` a texto para enviarlo
+- `setSent(true)` cambia el botón a "Mensaje enviado" por 4 segundos
+- `setForm(...)` limpia los campos después de enviar
+
+### Cómo se configuró Formspree
+
+1. Se creó una cuenta en https://formspree.io
+2. Se creó un nuevo form llamado "Portafolio Samuel"
+3. Formspree entregó un endpoint único con este formato: `https://formspree.io/f/ID`
+4. Ese ID se pegó en el `fetch` dentro de `Contact.jsx`
+5. Los mensajes llegan directo a `samuel.br1107@gmail.com`
+
+### Notas
+- No se instaló ninguna librería extra, `fetch` es nativo del browser
+- El plan gratuito de Formspree permite 50 envíos por mes
 
 
 ---
