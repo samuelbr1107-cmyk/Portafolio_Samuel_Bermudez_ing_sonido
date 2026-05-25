@@ -1,0 +1,111 @@
+/* seccion de habilidades con fondo base */
+.skills { background: var(--bg); }
+
+/* grilla de 3 columnas para las categorias */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 64px;
+}
+
+/* cada caja de categoria */
+.skill-cat {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 28px 24px;
+  transition: border-color 0.25s;
+}
+/* al hacer hover el borde se ilumina */
+.skill-cat:hover { border-color: rgba(0,229,176,0.35); }
+
+/* titulo de cada categoria */
+.skill-cat-title {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* lista de habilidades dentro de cada categoria */
+.skill-bars { display: flex; flex-direction: column; gap: 14px; }
+
+
+/* fila con nombre y porcentaje */
+.skill-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+/* nombre de la habilidad */
+.skill-name { font-size: 0.76rem; color: rgba(232,237,242,0.75); }
+
+/* numero del porcentaje en verde */
+.skill-pct  { font-size: 0.68rem; color: var(--accent); font-family: var(--font-mono); }
+
+/* fondo gris de la barra */
+.skill-track {
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* barra de relleno que se anima al cargar */
+.skill-fill {
+  height: 100%;
+  width: var(--w); /* el ancho viene de un css variable que se pone inline */
+  background: linear-gradient(90deg, var(--accent), var(--accent2)); /* degradado verde a azul */
+  border-radius: 2px;
+  animation: growBar 1.2s cubic-bezier(.22,1,.36,1) both;
+}
+
+/* animacion de la barra creciendo de izquierda a derecha */
+@keyframes growBar {
+  from { width: 0; }
+  to   { width: var(--w); }
+}
+
+/* seccion de tags debajo de las barras */
+.tags-section {
+  border-top: 1px solid var(--border);
+  padding-top: 40px;
+}
+
+/* contenedor de los tags */
+.tags { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* cada tag de area de interes */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  transition: all 0.2s;
+  cursor: default;
+}
+/* al hacer hover el tag se ilumina */
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0,229,176,0.05);
+}
+
+/* en tablets dos columnas */
+@media (max-width: 960px) {
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+}
+/* en celular una sola columna */
+@media (max-width: 600px) {
+  .skills-grid { grid-template-columns: 1fr; }
+}

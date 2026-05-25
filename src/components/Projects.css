@@ -1,0 +1,154 @@
+/* seccion de proyectos con fondo ligeramente diferente */
+.projects { background: var(--bg2); border-top: 1px solid var(--border); }
+
+/* grilla de 3 columnas para las tarjetas */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* cada tarjeta de proyecto */
+.project-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden; /* que la imagen no se salga de la tarjeta */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+/* linea de color que aparece arriba de la tarjeta al hacer hover */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--card-accent, var(--accent)); /* cada tarjeta tiene su propio color */
+  transform: scaleX(0); /* empieza invisible */
+  transform-origin: left;
+  transition: transform 0.35s ease;
+  z-index: 1;
+}
+
+/* al hacer hover la tarjeta sube un poco y aparece la linea */
+.project-card:hover {
+  border-color: rgba(0,229,176,0.3);
+  transform: translateY(-4px);
+}
+.project-card:hover::before { transform: scaleX(1); }
+
+/* contenedor de la imagen */
+.card-img-wrap {
+  width: 100%;
+  height: 180px;
+  overflow: hidden; /* que el zoom de la imagen no se salga */
+  flex-shrink: 0; /* que no se achique si el contenido de abajo crece */
+}
+
+/* la imagen dentro de la tarjeta */
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(25%) brightness(0.85); /* un poco apagada por defecto */
+  transition: filter 0.4s, transform 0.4s;
+}
+
+/* al hacer hover la imagen se ilumina y hace zoom */
+.project-card:hover .card-img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.04);
+}
+
+/* cuerpo de texto debajo de la imagen */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  flex: 1; /* que ocupe el espacio restante */
+}
+
+/* fila superior con el numero y el badge */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* el numero 01, 02, etc */
+.card-id {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--card-accent, var(--accent));
+  opacity: 0.55;
+}
+
+/* etiqueta tipo "Publicado", "Investigacion activa", etc */
+.card-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* subtitulo con el tipo de proyecto */
+.card-type {
+  font-size: 0.67rem;
+  color: var(--muted);
+  letter-spacing: 0.07em;
+}
+
+/* titulo de la tarjeta */
+.card-title {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+/* descripcion del proyecto */
+.card-desc {
+  font-size: 0.77rem;
+  color: rgba(232,237,242,0.58);
+  line-height: 1.72;
+  flex: 1; /* empuja los tags hacia abajo */
+}
+
+/* fila de tags al fondo de la tarjeta */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* cada tag individual */
+.card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  padding: 3px 8px;
+  background: rgba(0,229,176,0.05);
+  color: var(--card-accent, var(--accent));
+  border-radius: 2px;
+}
+
+/* en tablets dos columnas */
+@media (max-width: 960px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* en celular una sola columna y la imagen mas alta */
+@media (max-width: 560px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .card-img-wrap { height: 200px; }
+}

@@ -1,0 +1,89 @@
+/* barra de navegacion fija en la parte superior */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; /* que quede por encima de todo */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 40px;
+  transition: background 0.35s ease, padding 0.35s ease, border-color 0.35s ease;
+  border-bottom: 1px solid transparent; /* empieza invisible */
+}
+
+/* cuando el usuario scrollea, el nav se oscurece con blur */
+.nav--scrolled {
+  background: rgba(8, 12, 16, 0.92);
+  backdrop-filter: blur(12px); /* efecto vidrio esmerilado */
+  padding: 14px 40px; /* se achica un poco al scrollear */
+  border-color: var(--border); /* aparece la linea de abajo */
+}
+
+/* el logo [SBR] */
+.nav-logo {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.nav-logo:hover { color: var(--accent); }
+
+/* los corchetes del logo en verde */
+.nav-logo-bracket { color: var(--accent); }
+
+/* lista de links del menu */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 36px;
+}
+
+/* cada link del menu */
+.nav-link {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative; /* necesario para el subrayado animado */
+}
+
+/* linea que aparece debajo al hacer hover, empieza con ancho 0 */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -3px;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+
+/* al hacer hover el link se pone verde y aparece la linea */
+.nav-link:hover { color: var(--accent); }
+.nav-link:hover::after { width: 100%; }
+
+/* en celular el logo y los links se apilan */
+@media (max-width: 600px) {
+  .nav { 
+    flex-direction: column;
+    gap: 10px; 
+    padding: 15px 20px; 
+  }
+  .nav--scrolled { padding: 10px 20px; }
+  
+  /* los links se centran y si son muchos bajan a otra fila */
+  .nav-links { 
+    gap: 15px; 
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav-link { 
+    font-size: 0.65rem; 
+  }
+}

@@ -1,0 +1,129 @@
+/* seccion de contacto con fondo base */
+.contact {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+/* dos columnas: info a la izquierda, formulario a la derecha */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+/* parrafo de descripcion debajo del titulo */
+.contact-sub {
+  font-size: 0.86rem;
+  color: rgba(232,237,242,0.65);
+  line-height: 1.75;
+  margin-bottom: 36px;
+}
+
+/* lista de links de contacto sin bullets */
+.contact-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* cada fila de la lista: etiqueta arriba, valor abajo */
+.contact-link-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0,229,176,0.08); /* linea separadora muy sutil */
+}
+
+/* etiqueta tipo "Email personal", "Telefono", etc */
+.cl-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* el valor del link o texto */
+.cl-value {
+  font-size: 0.83rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+/* los links se ponen verdes al hacer hover */
+a.cl-value:hover { color: var(--accent); }
+
+/* para los valores que no son links, un poco mas apagados */
+.cl-plain { color: rgba(232,237,242,0.6); }
+
+/* caja del formulario */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 32px;
+}
+
+/* cada campo del formulario con su label */
+.field { display: flex; flex-direction: column; gap: 6px; }
+
+/* etiqueta encima de cada input */
+.field-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* estilo base de los inputs y textarea */
+.field-input {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  resize: none; /* que el textarea no se pueda redimensionar */
+}
+
+/* cuando el campo esta activo se pone el borde verde */
+.field-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,229,176,0.08);
+}
+
+/* placeholder mas apagado */
+.field-input::placeholder { color: var(--muted); opacity: 0.6; }
+
+/* altura minima del textarea */
+.field-textarea { min-height: 120px; }
+
+/* boton de enviar */
+.send-btn {
+  align-self: flex-start; /* que no ocupe todo el ancho */
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+}
+
+/* cuando se envia el formulario el boton cambia a estilo ghost */
+.send-btn.sent {
+  background: transparent;
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+/* en celular las dos columnas se apilan */
+@media (max-width: 860px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+}

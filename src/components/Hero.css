@@ -1,0 +1,168 @@
+/* seccion principal que ocupa toda la pantalla */
+.hero {
+  position: relative;
+  min-height: 100vh; /* que ocupe minimo toda la altura del navegador */
+  display: flex;
+  align-items: center; /* centra el contenido verticalmente */
+  overflow: hidden; /* esconde lo que se salga */
+  /* fondo oscuro con dos manchas de color sutiles, una verde y una azul */
+  background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(0,229,176,0.06) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 80% at 80% 80%, rgba(0,153,255,0.04) 0%, transparent 70%),
+              var(--bg);
+}
+
+/* canvas del fondo con las ondas animadas */
+.waveform-canvas {
+  position: absolute;
+  inset: 0; /* cubre todo el hero */
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* que no interfiera con los clics */
+  opacity: 0.8;
+}
+
+/* caja del texto principal encima del canvas */
+.hero-content {
+  position: relative;
+  z-index: 2; /* que quede por encima del canvas */
+  max-width: 680px;
+  padding: 120px 40px 80px;
+  animation: fadeUp 0.9s ease both; /* entra desde abajo al cargar */
+}
+
+/* la linea de texto pequena arriba del nombre */
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.18em; /* espaciado entre letras estilo tecnico */
+  margin-bottom: 24px;
+  opacity: 0.75;
+}
+
+/* el nombre grande */
+.hero-name {
+  font-family: var(--font-head);
+  font-size: clamp(3.5rem, 10vw, 7rem); /* se ajusta segun el ancho de pantalla */
+  font-weight: 800;
+  line-height: 0.95;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+/* la parte del nombre que va en verde */
+.hero-name-accent { color: var(--accent); }
+
+/* los roles separados por puntos */
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted); /* gris apagado */
+  letter-spacing: 0.12em;
+  margin-bottom: 20px;
+}
+
+/* el parrafo de descripcion */
+.hero-desc {
+  font-size: 0.92rem;
+  color: rgba(232,237,242,0.7); /* blanco con algo de transparencia */
+  max-width: 480px;
+  margin-bottom: 36px;
+  line-height: 1.75;
+}
+
+/* contenedor de los dos botones */
+.hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* estilo base compartido por los dos botones */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+/* boton principal relleno verde */
+.btn--primary {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+/* al hacer hover se vuelve transparente con borde */
+.btn--primary:hover {
+  background: transparent;
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent), var(--glow);
+}
+
+/* boton secundario solo con borde */
+.btn--ghost {
+  background: transparent;
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+/* al hacer hover el borde se pone verde */
+.btn--ghost:hover {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+/* las barritas decorativas tipo ecualizador abajo a la derecha */
+.hero-freq {
+  position: absolute;
+  right: 60px;
+  bottom: 60px;
+  display: flex;
+  align-items: flex-end; /* que las barras crezcan hacia arriba */
+  gap: 5px;
+  height: 140px;
+  z-index: 2;
+  opacity: 0.35; /* bien sutiles */
+}
+
+/* cada barrita individual */
+.freq-bar {
+  width: 6px;
+  background: linear-gradient(to top, var(--accent), var(--accent2)); /* degradado verde a azul */
+  border-radius: 2px 2px 0 0;
+  animation: pulse 1.8s ease-in-out infinite alternate; /* se mueven solas */
+}
+
+/* animacion de entrada del contenido */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* animacion de las barritas del ecualizador */
+@keyframes pulse {
+  0%   { transform: scaleY(0.4); }
+  100% { transform: scaleY(1); }
+}
+
+/* ajustes para celular */
+@media (max-width: 768px) {
+  .hero-content { padding: 100px 20px 60px; }
+  .hero-freq { display: none; } /* las barritas se esconden en movil */
+  
+  /* el nombre se hace mas chico para que no se salga */
+  .hero-name {
+    font-size: clamp(2rem, 10vw, 3.2rem);
+    line-height: 1.1;
+    word-wrap: break-word; /* si es muy largo que corte la linea */
+  }
+  .hero-role {
+    font-size: 0.75rem; 
+  }
+  .hero-desc {
+    font-size: 0.85rem; 
+  }
+  .hero-cta {
+    justify-content: center; 
+  }
+}

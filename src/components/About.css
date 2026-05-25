@@ -1,0 +1,222 @@
+/* seccion sobre mi con fondo ligeramente diferente al resto */
+.about {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 20px;
+}
+
+/* fila superior: texto a la izquierda, foto a la derecha */
+.about-top {
+  display: grid;
+  grid-template-columns: 1fr 340px; /* columna de texto flexible, foto fija en 340px */
+  gap: 64px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+
+/* parrafos del texto de descripcion */
+.about-p {
+  font-size: 0.88rem;
+  color: rgba(232,237,242,0.72); /* blanco suavizado */
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+/* fila de numeros destacados debajo del texto */
+.about-meta {
+  display: flex;
+  gap: 28px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap; /* si no caben en una fila se bajan */
+}
+
+/* cada numero con su etiqueta */
+.meta-item { display: flex; flex-direction: column; }
+
+/* el numero grande en verde */
+.meta-val {
+  font-family: var(--font-head);
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* la etiqueta chica debajo del numero */
+.meta-key {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* contenedor de la foto de perfil */
+.about-photo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: sticky; /* se queda fija mientras scrolleas el texto */
+  top: 100px;
+}
+
+/* la foto de perfil en si */
+.about-photo {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 3 / 4; /* proporcion tipo retrato */
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  filter: grayscale(20%); /* un poco desaturada por defecto */
+  transition: filter 0.3s;
+}
+
+/* al hacer hover sale el color completo */
+.about-photo:hover { filter: grayscale(0%); }
+
+/* nombre debajo de la foto */
+.photo-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+/* fila inferior con las dos fotos y el timeline */
+.about-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr; /* dos fotos iguales y el timeline un poco mas ancho */
+  gap: 24px;
+  align-items: start;
+  border-top: 1px solid var(--border);
+  padding-top: 48px;
+}
+
+/* cada foto de la galeria con su caption */
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* las fotos de la galeria */
+.gallery-item img {
+  width: 100%;
+  aspect-ratio: 4 / 3; /* formato horizontal tipo landscape */
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  filter: grayscale(30%);
+  transition: filter 0.3s, transform 0.3s;
+}
+
+/* hover: color completo y zoom suave */
+.gallery-item img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.015);
+}
+
+/* texto debajo de cada foto */
+.gallery-caption {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+/* contenedor del timeline que va en la tercera columna */
+.gallery-timeline { padding-top: 4px; }
+
+/* lista de items del timeline */
+.timeline { display: flex; flex-direction: column; }
+
+/* cada fila del timeline: año, punto y texto */
+.timeline-item {
+  display: grid;
+  grid-template-columns: 46px 14px 1fr; /* columna fija para el año, columna fija para el punto, resto para el texto */
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(0,229,176,0.07);
+}
+
+/* el ultimo item no lleva linea abajo */
+.timeline-item:last-child { border-bottom: none; }
+
+/* al hacer hover el texto se ilumina */
+.timeline-item:hover .tl-label { color: var(--text); }
+
+/* al hacer hover el punto se pone verde con glow */
+.timeline-item:hover .tl-dot   { background: var(--accent); box-shadow: var(--glow); }
+
+/* el año a la izquierda */
+.tl-year {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--accent);
+  text-align: right;
+  opacity: 0.65;
+}
+
+/* el puntito del medio */
+.tl-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+  justify-self: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+/* el texto del evento */
+.tl-label {
+  font-size: 0.76rem;
+  color: rgba(232,237,242,0.6);
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+
+/* en tablets la foto va abajo del texto */
+@media (max-width: 1024px) {
+  .about-top { grid-template-columns: 1fr; }
+  .about-photo-wrap { position: static; margin-top: 30px; } /* deja de ser sticky */
+}
+
+/* en celular todo en una sola columna */
+@media (max-width: 850px) {
+  .about-gallery { 
+    grid-template-columns: 1fr; 
+    gap: 30px;
+  }
+  .gallery-timeline { 
+    grid-column: 1 / -1; /* ocupa todo el ancho disponible */
+  }
+  
+  /* el titulo se achica para que no se corte en pantallas chicas */
+  .section-title {
+    font-size: 2.2rem !important; 
+    line-height: 1.2 !important;
+    margin-bottom: 20px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important; 
+  }
+
+  .about-photo-wrap { 
+    flex-direction: column; 
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* la foto se achica un poco en movil */
+  .about-photo { 
+    max-width: 240px; 
+    border-radius: 8px; 
+    margin: 0 auto;
+  }
+}

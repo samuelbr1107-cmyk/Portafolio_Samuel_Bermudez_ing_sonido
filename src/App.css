@@ -1,0 +1,107 @@
+/* importa las dos fuentes de google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap');
+
+/* variables globales de color, tipografia y efectos */
+:root {
+  --bg:        #080c10; /* fondo mas oscuro */
+  --bg2:       #0d1318; /* fondo medio para secciones alternas */
+  --bg3:       #111820; /* fondo de tarjetas */
+  --accent:    #00e5b0; /* verde principal */
+  --accent2:   #0099ff; /* azul para degradados */
+  --text:      #e8edf2; /* blanco suavizado */
+  --muted:     #5a6a78; /* gris para textos secundarios */
+  --border:    rgba(0, 229, 176, 0.15); /* borde verde transparente */
+  --glow:      0 0 24px rgba(0, 229, 176, 0.25); /* sombra verde difusa */
+  --font-head: 'Syne', sans-serif; /* titulos */
+  --font-mono: 'Space Mono', monospace; /* textos y etiquetas */
+}
+
+/* reset basico */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* scroll suave al hacer click en los links del nav */
+html { scroll-behavior: smooth; }
+
+/* evita el scroll horizontal en movil */
+html, body, #root {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* estilos base del body */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* scrollbar personalizada, solo en navegadores webkit */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* color de seleccion de texto */
+::selection { background: var(--accent); color: var(--bg); }
+
+/* padding vertical de cada seccion */
+.section { padding: 100px 0; }
+
+/* contenedor centrado con ancho maximo */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 0px; }
+
+/* etiqueta pequena verde encima de los titulos */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+/* agrega los // antes de cada etiqueta */
+.section-label::before { content: "// "; opacity: 0.5; }
+
+/* titulo grande de cada seccion */
+.section-title {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.2rem); /* se ajusta segun el ancho de pantalla */
+  font-weight: 800;
+  line-height: 1.05;
+  margin-bottom: 48px;
+  color: var(--text);
+}
+
+/* linea decorativa verde, no se usa mucho pero esta disponible */
+.h-line {
+  width: 48px;
+  height: 2px;
+  background: var(--accent);
+  margin: 20px 0 40px;
+}
+
+/* footer al fondo de la pagina */
+.footer {
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 32px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  max-width: 1100px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+/* el texto de la derecha del footer en verde */
+.footer-tag { color: var(--accent); }
+
+/* en movil el footer se centra */
+@media (max-width: 768px) {
+  .section { padding: 72px 0; }
+  .footer { justify-content: center; text-align: center; }
+}
